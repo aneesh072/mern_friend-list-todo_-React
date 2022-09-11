@@ -1,17 +1,24 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 const FriendModel = require('./models/Friends');
 
+app.use(express.json());
+app.use(cors());
 //database connection
 mongoose.connect(
-  'mongodb+srv://admin:admin@cluster0.rafogxh.mongodb.net/merntutorial?retryWrites=true&w=majority'
+  'mongodb+srv://admin:admin@cluster0.rafogxh.mongodb.net/merntutorial?retryWrites=true&w=majority',
+  { useNewUrlParser: true }
 );
 
-app.get('/insert', async (req, res) => {
-  const friend = new FriendModel({ name: 'wqerfwer', age: 24 });
+app.post('/addfriend', async (req, res) => {
+  const name = req.body.name;
+  const age = req.body.age;
+
+  const friend = new FriendModel({ name: name, age: age });
   await friend.save();
-  res.send('Inserted data');
+  res.send('Success');
 });
 
 app.get('/read', async (req, res) => {
@@ -24,6 +31,6 @@ app.get('/read', async (req, res) => {
   });
 });
 
-app.listen(3002, () => {
+app.listen(3005, () => {
   console.log('You are connected');
 });
