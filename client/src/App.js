@@ -14,6 +14,9 @@ const App = () => {
       })
       .catch((error) => {
         console.log(error);
+      })
+      .then(() => {
+        setListOfFriends([...listOfFriends, { name: name, age: age }]);
       });
   };
 
@@ -46,13 +49,20 @@ const App = () => {
         ></input>
         <button onClick={addFriend}>Add Friend</button>
       </div>
-      {listOfFriends.map((listOfFriend, index) => {
-        return (
-          <div key={index}>
-            {listOfFriend.name} {listOfFriend.age}{' '}
-          </div>
-        );
-      })}
+      <div className="listOfFriends">
+        {listOfFriends.map((val, index) => {
+          return (
+            <div className="friendContainer">
+              <div key={index} className="friend">
+                <h3> Name: {val.name}</h3>
+                <h3> Age: {val.age}</h3>
+              </div>
+              <button>Update</button>
+              <button id='remove'>Delete</button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

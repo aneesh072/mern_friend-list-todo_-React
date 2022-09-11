@@ -1,7 +1,6 @@
 .App {
   display: flex;
   justify-content: center;
-  height: 100vh;
   flex-direction: column;
 }
 
@@ -39,6 +38,43 @@ body {
   font-size: 15px;
 }
 
-.inputs button:hover {
+button:hover {
   cursor: pointer;
+}
+
+.listOfFriends {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.friendContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.friend {
+  width: 400px;
+  height: 60px;
+  background-color: rgb(49, 145, 5);
+  color: white;
+  font-family: 'Courier New', 'Courier New', Courier, monospace;
+  display: flex;
+}
+
+.friend h3 {
+  margin-left: 15px;
+}
+.friendContainer button {
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+  background-color: rgb(73, 197, 15);
+  color: aliceblue;
+}
+
+#remove {
+  border-left: none;
 }
