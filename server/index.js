@@ -46,6 +46,12 @@ app.put('/update', async (req, res) => {
   res.send('Updated');
 });
 
+app.delete('/delete/:id', async (req, res) => {
+  const id = req.params.id;
+  await FriendModel.findByIdAndRemove(id).exec();
+  res.send('Item deleted');
+});
+
 app.listen(3005, () => {
   console.log('You are connected');
 });

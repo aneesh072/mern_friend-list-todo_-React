@@ -9,14 +9,11 @@ const App = () => {
 
   const addFriend = () => {
     Axios.post('http://localhost:3005/addfriend', { name: name, age: age })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .then(() => {
-        setListOfFriends([...listOfFriends, { name: name, age: age }]);
+      .then((response) => {
+        setListOfFriends([
+          ...listOfFriends,
+          { _id:response.data._id, name: name, age: age },
+        ]);
       });
   };
 
@@ -33,6 +30,16 @@ const App = () => {
         );
       }
     );
+  };
+
+  const deleteFriend = (id) => {
+    Axios.delete(`http://localhost:3005/delete/${id}`).then(() => {
+      setListOfFriends(
+        listOfFriends.filter((val) => {
+          return val._id != id;
+        })
+      );
+    });
   };
 
   useEffect(() => {
@@ -79,7 +86,14 @@ const App = () => {
               >
                 Update
               </button>
-              <button id="remove">Delete</button>
+              <button
+                id="remove"
+                onClick={() => {
+                  deleteFriend(val._id);
+                }}
+              >
+                Delete
+              </button>
             </div>
           );
         })}
